@@ -1,18 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/custom_background"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/login_image"
+        android:src="@drawable/login_image"
+        android:layout_marginTop="90dp"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/internship"
+        android:text="Internship"
+        android:textColor="@color/white_trans"
+        android:textSize="35dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/login_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:drawableLeft="@drawable/emailid_image"
+        android:id="@+id/main_emailid"
+        android:inputType="textEmailAddress"
+        android:hint="Email Id"
+        android:textColorHint="@color/white_trans"
+        android:textColor="@color/white_trans"
+        android:layout_below="@id/internship"
+        android:drawablePadding="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:drawableLeft="@drawable/password_image"
+        android:id="@+id/main_password"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textColorHint="@color/white_trans"
+        android:textColor="@color/white_trans"
+        android:layout_below="@id/main_emailid"
+        android:drawablePadding="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

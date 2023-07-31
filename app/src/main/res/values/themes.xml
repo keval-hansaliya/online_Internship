@@ -3,6 +3,9 @@
     <style name="Base.Theme.Internship" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#F44336</item>
+        <item name="colorPrimaryDark">#9E48E1</item>
+        <item name="android:statusBarColor">@color/status_color</item>
     </style>
 
     <style name="Theme.Internship" parent="Base.Theme.Internship" />
