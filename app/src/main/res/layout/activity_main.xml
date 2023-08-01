@@ -9,8 +9,7 @@
 
     <ImageView
         android:id="@+id/login_image"
-        android:src="@drawable/l
-        ogin_image"
+        android:src="@drawable/login_image"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
