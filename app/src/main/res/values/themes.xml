@@ -11,14 +11,21 @@
     <style name="Theme.Internship" parent="Base.Theme.Internship" />
 
     <style name="edittext_14" parent="Widget.AppCompat.EditText">
-        <item name="marginHorizontal">@dimen/_20sdp</item>
-        <item name="background">@drawable/custom_border</item>
+        <item name="android:layout_marginHorizontal">@dimen/_20sdp</item>
+        <item name="android:background">@drawable/custom_border</item>
         <item name="android:layout_marginTop">@dimen/_20sdp</item>
         <item name="android:paddingHorizontal">@dimen/_10sdp</item>
         <item name="android:paddingVertical">@dimen/_6sdp</item>
+        <item name="android:drawablePadding">@dimen/_5sdp</item>
         <item name="android:textSize">@dimen/_14sdp</item>
         <item name="android:textColor">@color/white_trans</item>
         <item name="android:textColorHint">@color/white_trans</item>
+    </style>
+
+    <style name="radio_16" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/white_trans</item>
+        <item name="android:textSize">@dimen/_16sdp</item>
+        <item name="android:textColor">@color/white_trans</item>
     </style>
 
 </resources>
