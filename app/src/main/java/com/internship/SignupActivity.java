@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,7 +34,9 @@ public class SignupActivity extends AppCompatActivity {
 
     Spinner city;
 
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+", scity = "";
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+", sCity = "", sGender;
+
+    SQLiteDatabase db;
 
 //    String[] cityarray = {"Ahmedabad", "vadodora", "Rajkot", "Bhavnagar", "Surat", "Veravad", "Dhoraji", "Kadi", "Patola"};
     ArrayList<String> arrayList;
@@ -55,6 +57,11 @@ public class SignupActivity extends AppCompatActivity {
         confirmpassword = findViewById(R.id.signup_confirm_password);
         dob = findViewById(R.id.signup_dob);
         calendar = Calendar.getInstance();
+
+        db = openOrCreateDatabase("Internship", MODE_PRIVATE, null);
+
+        String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20), EMAIL VARCHAR(20), CONTACT INT(10), PASSWORD VARCHAR(20), GENDER VARCHAR(6), CITY VARCHAR(15), DOB VARCHAR(10))";
+        db.execSQL(tableQuery);
 
         DatePickerDialog.OnDateSetListener dateClick = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -98,11 +105,11 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i==0) {
-                    scity = "";
+                    sCity = "";
                 }
                 else {
-                    scity = arrayList.get(i);
-                    new CommonMethod(SignupActivity.this, scity);
+                    sCity = arrayList.get(i);
+                    new CommonMethod(SignupActivity.this, sCity);
                 }
             }
 
@@ -157,11 +164,14 @@ public class SignupActivity extends AppCompatActivity {
                     confirmpassword.setError("Password does not match");
                 } else if (gender.getCheckedRadioButtonId() == -1) {
                     new CommonMethod(SignupActivity.this, "Please select gender");
-                } else if (scity.equals("")) {
+                } else if (sCity.equals("")) {
                     new CommonMethod(SignupActivity.this, "Please select city");
                 } else if (dob.getText().toString().trim().equals("")) {
                     dob.setError("Please select date of birth");
                 } else {
+                    String insertQuery = "INSERT INTO USERS VALUES(NULL, '"+name.getText().toString()+"', '"+email.getText().toString()+"', '"+contact.getText().toString()+"', '"+password.getText().toString()+"', '"+sGender+"', '"+sCity+"', '"+dob.getText().toString()+"')";
+                    db.execSQL(insertQuery);
+
                     System.out.println("Signup successfully");
 //                    Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
 //                    Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
