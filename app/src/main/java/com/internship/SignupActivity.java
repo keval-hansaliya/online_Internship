@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -125,7 +126,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radiobutton = findViewById(i);
-                new CommonMethod(SignupActivity.this, radiobutton.getText().toString());
+                sGender = radiobutton.getText().toString();
+                new CommonMethod(SignupActivity.this, sGender);
                 System.out.println(i);
             }
         });
@@ -169,18 +171,28 @@ public class SignupActivity extends AppCompatActivity {
                 } else if (dob.getText().toString().trim().equals("")) {
                     dob.setError("Please select date of birth");
                 } else {
-                    String insertQuery = "INSERT INTO USERS VALUES(NULL, '"+name.getText().toString()+"', '"+email.getText().toString()+"', '"+contact.getText().toString()+"', '"+password.getText().toString()+"', '"+sGender+"', '"+sCity+"', '"+dob.getText().toString()+"')";
-                    db.execSQL(insertQuery);
 
-                    System.out.println("Signup successfully");
-//                    Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
-//                    Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-//                    startActivity(intent);
+                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL = '"+email.getText().toString()+"' OR CONTACT = '"+contact.getText().toString()+"'";
+                    Cursor cursor = db.rawQuery(selectQuery, null);
+                    if(cursor.getCount() > 0) {
+                        new CommonMethod(SignupActivity.this, "EmailId/Contact no. already registered");
+                    } else {
 
-                    new CommonMethod(SignupActivity.this, "Signup successfully");
-                    new CommonMethod(view, "Signup Successfully");
-                    new CommonMethod(SignupActivity.this, HomeActivity.class);
+                        String insertQuery = "INSERT INTO USERS VALUES(NULL, '" + name.getText().toString() + "', '" + email.getText().toString() + "', '" + contact.getText().toString() + "', '" + password.getText().toString() + "', '" + sGender + "', '" + sCity + "', '" + dob.getText().toString() + "')";
+                        db.execSQL(insertQuery);
+
+                        System.out.println("Signup successfully");
+//                        Toast.makeText(MainActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
+//                        Snackbar.make(view, "Login Successfully", Snackbar.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+//                        startActivity(intent);
+
+                        new CommonMethod(SignupActivity.this, "Signup successfully");
+                        new CommonMethod(view, "Signup Successfully");
+                        new CommonMethod(SignupActivity.this, HomeActivity.class);
+
+                        onBackPressed();
+                    }
 
                 }
             }

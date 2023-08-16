@@ -1,9 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    android:background="@drawable/custom_background"
+    tools:context=".SignupActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/home_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:drawableLeft="@drawable/image_username"
+        style="@style/edittext_14"
+        android:autofillHints="name" />
+
+    <EditText
+        android:id="@+id/home_emailid"
+        android:layout_below="@id/home_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/image_emailid"
+        android:inputType="textEmailAddress"
+        android:hint="Email Id"
+        style="@style/edittext_14"/>
+
+    <EditText
+        android:id="@+id/home_contactno"
+        android:layout_below="@+id/home_emailid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/image_contactno"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:hint="Contact no"
+        style="@style/edittext_14"/>
+
+    <RadioGroup
+        android:id="@+id/home_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_contactno"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/home_male"
+            style="@style/radio_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/home_female"
+            style="@style/radio_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Female" />
+
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/home_city"
+        android:layout_below="@id/home_gender"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white_trans"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:popupBackground="@color/white" />
+
+    <EditText
+        android:editable="false"
+        android:id="@+id/home_dob"
+        android:layout_below="@id/home_city"
+        android:layout_width="match_parent"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:drawableLeft="@drawable/image_emailid"
+        android:hint="Date Of Birth"
+        android:inputType="textPersonName"
+        style="@style/edittext_14" />
+
+    <Button
+        android:id="@+id/home_update_profile"
+        android:layout_below="@+id/home_dob"
+        android:text="Update profile"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/white_trans"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_button_signup"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/home_logout_button"
+        android:layout_below="@+id/home_update_profile"
+        android:text="Log Out"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#FEA387"
+        app:backgroundTint="@null"
+        android:background="@drawable/custom_button_login"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

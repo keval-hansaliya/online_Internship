@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <EditText
+    <EditText
             android:id="@+id/main_internship"
             android:text="Internship"
             android:textColor="@color/white_trans"
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <EditText
+    <EditText
             android:drawableLeft="@drawable/image_emailid"
             android:id="@+id/main_emailid"
             style="@style/edittext_14"
@@ -36,6 +36,11 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"/>
 
+    <FrameLayout
+        android:id="@+id/main_password_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_emailid">
 
         <EditText
             android:drawableLeft="@drawable/image_password"
@@ -47,9 +52,30 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"/>
 
-        <CheckBox
-            android:id="@+id/main_checkbox"
-            android:layout_below="@+id/main_password"
+        <ImageView
+            android:id="@+id/main_password_show"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/password_show"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="@dimen/_35sdp"/>
+
+        <ImageView
+            android:id="@+id/main_password_hide"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/password_hide"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="@dimen/_35sdp"/>
+
+    </FrameLayout>
+
+    <CheckBox
+            android:id="@+id/main_remember"
+            android:layout_below="@+id/main_password_frame"
             android:text="Remember me"
             android:textColor="@color/white_trans"
             app:buttonTint="@color/white_trans"
@@ -58,9 +84,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Button
+    <Button
             android:id="@+id/main_login_button"
-            android:layout_below="@+id/main_checkbox"
+            android:layout_below="@+id/main_remember"
             android:text="Log In"
             android:layout_marginTop="20dp"
             android:textStyle="bold"
@@ -72,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <Button
+    <Button
             android:id="@+id/main_signup_button"
             android:layout_below="@+id/main_login_button"
             android:text="Sign up"
@@ -86,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
+    <TextView
             android:id="@+id/main_forgetpassword"
             android:layout_below="@+id/main_signup_button"
             android:text="Forget your password"
