@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
                     new CommonMethod(SplashActivity.this, MainActivity.class);
                 }
                 else {
-                    new CommonMethod(SplashActivity.this, HomeActivity.class);
+                    new CommonMethod(SplashActivity.this, DashboardActivity.class);
                 }
             }
         }, 1500);

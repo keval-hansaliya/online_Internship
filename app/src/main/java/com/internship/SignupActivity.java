@@ -189,7 +189,7 @@ public class SignupActivity extends AppCompatActivity {
 
                         new CommonMethod(SignupActivity.this, "Signup successfully");
                         new CommonMethod(view, "Signup Successfully");
-                        new CommonMethod(SignupActivity.this, HomeActivity.class);
+                        new CommonMethod(SignupActivity.this, DashboardActivity.class);
 
                         onBackPressed();
                     }

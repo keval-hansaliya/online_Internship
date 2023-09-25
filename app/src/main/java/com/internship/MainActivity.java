@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
                         new CommonMethod(MainActivity.this, "Login successfully");
                         new CommonMethod(view, "Login Successfully");
-                        new CommonMethod(MainActivity.this, HomeActivity.class);
+                        new CommonMethod(MainActivity.this, DashboardActivity.class);
                     } else {
                         new CommonMethod(MainActivity.this, "Wrong credentials");
                     }

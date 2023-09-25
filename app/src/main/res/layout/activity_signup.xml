@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:hint="Name"
         android:drawableLeft="@drawable/image_username"
-        style="@style/edittext_14"
-        android:autofillHints="name" />
+        style="@style/edittext_14" />
 
     <EditText
         android:id="@+id/signup_emailid"
@@ -117,7 +116,7 @@
         android:textSize="20dp"
         android:textColor="@color/white_trans"
         app:backgroundTint="@null"
-        android:background="@drawable/custom_button_signup"
+        android:background="@drawable/custom_button_red"
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -131,7 +130,7 @@
         android:textSize="20dp"
         android:textColor="#FEA387"
         app:backgroundTint="@null"
-        android:background="@drawable/custom_button_login"
+        android:background="@drawable/custom_button_white"
         android:layout_marginHorizontal="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

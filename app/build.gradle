@@ -37,6 +37,15 @@ dependencies {
     // responsive design/UI
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
+    //meow bottom navigation
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
+
+//    circle imageview
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+//    razorpay payment library
+    implementation 'com.razorpay:checkout:1.6.33'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

@@ -1,14 +1,23 @@
 package com.internship;
 
+import static android.content.Context.MODE_PRIVATE;
+import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.fragment.app.Fragment;
+
+
 import android.app.DatePickerDialog;
+//import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,18 +26,17 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class HomeActivity extends AppCompatActivity {
+public class ProfileFragment extends Fragment {
 
     SharedPreferences sp;
 
-    Button logout, updateProfile;
+    Button logout, updateProfile, editProfile;
 
     EditText name, email, contact, dob;
 
@@ -47,14 +55,19 @@ public class HomeActivity extends AppCompatActivity {
     //    String[] cityarray = {"Ahmedabad", "vadodora", "Rajkot", "Bhavnagar", "Surat", "Veravad", "Dhoraji", "Kadi", "Patola"};
     ArrayList<String> arrayList;
 
+    public ProfileFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        sp = getSharedPreferences(ConstantSp.PREF, MODE_PRIVATE);
+        sp = getActivity().getSharedPreferences(ConstantSp.PREF, MODE_PRIVATE);
 
-//        name = findViewById(R.id.home_name);
+//        name = view.findViewById()(R.id.home_name);
 //        name.setText(sp.getString(ConstantSp.ID, "")+"\n"+
 //                sp.getString(ConstantSp.NAME, "")+"\n"+
 //                sp.getString(ConstantSp.EMAIL, "")+"\n"+
@@ -63,19 +76,19 @@ public class HomeActivity extends AppCompatActivity {
 //                sp.getString(ConstantSp.GENDER, "")+"\n"+
 //                sp.getString(ConstantSp.CITY, "")+"\n"+
 //                sp.getString(ConstantSp.DOB, ""));
-        logout = findViewById(R.id.home_logout_button);
-        updateProfile = findViewById(R.id.home_update_profile);
+        logout = view.findViewById(R.id.home_logout_button);
+        updateProfile = view.findViewById(R.id.home_update_profile);
 
-        name = findViewById(R.id.home_name);
-        email = findViewById(R.id.home_emailid);
-        contact = findViewById(R.id.home_contactno);
-        dob = findViewById(R.id.home_dob);
+        name = view.findViewById(R.id.home_name);
+        email = view.findViewById(R.id.home_emailid);
+        contact = view.findViewById(R.id.home_contactno);
+        dob = view.findViewById(R.id.home_dob);
         calendar = Calendar.getInstance();
 
-        male = findViewById(R.id.home_male);
-        female = findViewById(R.id.home_female);
+        male = view.findViewById(R.id.home_male);
+        female = view.findViewById(R.id.home_female);
 
-        db = openOrCreateDatabase("Internship", MODE_PRIVATE, null);
+        db = getActivity().openOrCreateDatabase("Internship", MODE_PRIVATE, null);
 
         String tableQuery = "CREATE TABLE IF NOT EXISTS USERS(USERID INTEGER PRIMARY KEY AUTOINCREMENT, NAME VARCHAR(20), EMAIL VARCHAR(20), CONTACT INT(10), PASSWORD VARCHAR(20), GENDER VARCHAR(6), CITY VARCHAR(15), DOB VARCHAR(10))";
         db.execSQL(tableQuery);
@@ -95,7 +108,7 @@ public class HomeActivity extends AppCompatActivity {
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog dpd = new DatePickerDialog(HomeActivity.this, dateClick, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog dpd = new DatePickerDialog(getActivity(), dateClick, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                 //datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
                 dpd.getDatePicker().setMaxDate(System.currentTimeMillis());
                 dpd.show();
@@ -112,9 +125,9 @@ public class HomeActivity extends AppCompatActivity {
         arrayList.add("Gandhinagar");
         arrayList.add("Ahmedabad");
 
-        city = findViewById(R.id.home_city);
+        city = view.findViewById(R.id.home_city);
 
-        ArrayAdapter adapter = new ArrayAdapter(HomeActivity.this, android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, arrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_activated_1);
         city.setAdapter(adapter);
 
@@ -126,7 +139,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 else {
                     sCity = arrayList.get(i);
-                    new CommonMethod(HomeActivity.this, sCity);
+                    new CommonMethod(getActivity(), sCity);
                 }
             }
 
@@ -136,14 +149,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        gender = findViewById(R.id.home_gender);
+        gender = view.findViewById(R.id.home_gender);
 
         gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                RadioButton radiobutton = findViewById(i);
+                RadioButton radiobutton = view.findViewById(i);
                 sGender = radiobutton.getText().toString();
-                new CommonMethod(HomeActivity.this, sGender);
+                new CommonMethod(getActivity(), sGender);
                 System.out.println(i);
             }
         });
@@ -154,7 +167,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sp.edit().clear().commit();
-                new CommonMethod(HomeActivity.this, MainActivity.class);
+                new CommonMethod(getActivity(), MainActivity.class);
             }
         });
 
@@ -172,36 +185,69 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (contact.getText().toString().trim().length()<10) {
                     contact.setError("Valid contact number required");
                 } else if (gender.getCheckedRadioButtonId() == -1) {
-                    new CommonMethod(HomeActivity.this, "Please select gender");
+                    new CommonMethod(getActivity(), "Please select gender");
                 } else if (sCity.equals("")) {
-                    new CommonMethod(HomeActivity.this, "Please select city");
+                    new CommonMethod(getActivity(), "Please select city");
                 } else if (dob.getText().toString().trim().equals("")) {
                     dob.setError("Please select date of birth");
                 } else {
 
-                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL = '"+email.getText().toString()+"' OR CONTACT = '"+contact.getText().toString()+"'";
+                    String selectQuery = "SELECT * FROM USERS WHERE USERID = '"+sp.getString(ConstantSp.ID, "")+"'";
                     Cursor cursor = db.rawQuery(selectQuery, null);
                     if(cursor.getCount() > 0) {
-                        new CommonMethod(HomeActivity.this, "EmailId/Contact no. already registered");
+                        String updateQuery = "UPDATE USERS SET NAME = '"+name.getText().toString()+"', CONTACT = '"+contact.getText().toString()+"', GENDER = '"+sGender+"', CITY = '"+sCity+"', DOB = '"+dob.getText().toString()+"' WHERE USERID = '"+sp.getString(ConstantSp.ID, "")+"'";
+                        db.execSQL(updateQuery);
+
+                        sp.edit().putString(ConstantSp.NAME, name.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.EMAIL, email.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.CONTACT, contact.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.GENDER, sGender).commit();
+                        sp.edit().putString(ConstantSp.CITY, sCity).commit();
+                        sp.edit().putString(ConstantSp.DOB, dob.getText().toString()).commit();
+
+                        new CommonMethod(getActivity(), "Data updated");
+                        setData(false);
                     } else {
-
-                        String insertQuery = "INSERT INTO USERS VALUES(NULL, '" + name.getText().toString() + "', '" + email.getText().toString() + "', '" + contact.getText().toString() + "', '" + sGender + "', '" + sCity + "', '" + dob.getText().toString() + "')";
-                        db.execSQL(insertQuery);
-
-                        new CommonMethod(HomeActivity.this, "Signup successfully");
-                        new CommonMethod(view, "Signup Successfully");
-                        new CommonMethod(HomeActivity.this, HomeActivity.class);
-                        onBackPressed();
+                        new CommonMethod(getActivity(), "Invalid userId");
                     }
 
                 }
             }
         });
 
-        setData();
+        editProfile = view.findViewById(R.id.home_edit_profile);
+
+        setData(false);
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setData(true);
+            }
+        });
+        return view;
     }
 
-    private void setData() {
+    private void setData(boolean isEnable) {
+
+        name.setEnabled(isEnable);
+        email.setEnabled(isEnable);
+        email.setEnabled(isEnable);
+        contact.setEnabled(isEnable);
+        male.setEnabled(isEnable);
+        female.setEnabled(isEnable);
+        city.setEnabled(isEnable);
+        dob.setEnabled(isEnable);
+
+        if (isEnable) {
+            updateProfile.setVisibility(View.VISIBLE);
+            editProfile.setVisibility(View.GONE);
+        }
+        else {
+            updateProfile.setVisibility(View.GONE);
+            editProfile.setVisibility(View.VISIBLE);
+        }
+
         Log.d("test", "test");
         name.setText(sp.getString(ConstantSp.NAME, ""));
         email.setText(sp.getString(ConstantSp.EMAIL, ""));
@@ -227,11 +273,5 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         city.setSelection(sPosition, true);
-    }
-
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-        finishAffinity();
     }
 }

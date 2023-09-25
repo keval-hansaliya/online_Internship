@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/custom_background"
+    tools:context=".ProductDetailActivity">
+
+    <ImageView
+        android:id="@+id/product_detail_image"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp" />
+
+    <TextView
+        android:id="@+id/product_detail_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        style="@style/textview_14" />
+
+    <TextView
+        android:id="@+id/product_detail_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        style="@style/textview_14" />
+
+    <TextView
+        android:id="@+id/product_detail_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        style="@style/textview_14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <Button
+            android:id="@+id/product_detail_add_to_cart"
+            android:text="Add to cart"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            style="@style/button_16_white"/>
+
+        <Button
+            android:id="@+id/product_detail_buy_now"
+            android:text="Buy now"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/button_16_white"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/product_detail_wishlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add to wishlist"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        style="@style/button_16_white"/>
+
+    <Button
+        android:id="@+id/product_detail_wishlist_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remove from wishlist"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        style="@style/button_16_white"/>
+
+
+</LinearLayout>

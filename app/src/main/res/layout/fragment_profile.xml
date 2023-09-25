@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/custom_background"
     tools:context=".SignupActivity">
 
     <EditText
@@ -89,31 +88,48 @@
         style="@style/edittext_14" />
 
     <Button
-        android:id="@+id/home_update_profile"
+        android:id="@+id/home_edit_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/home_dob"
+        android:text="Edit profile"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:backgroundTint="@null"
+        android:textColor="#FEA387"
+        android:background="@drawable/custom_button_white"
+        android:layout_marginHorizontal="20dp"/>
+
+
+    <Button
+        android:id="@+id/home_update_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/home_edit_profile"
         android:text="Update profile"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:textColor="@color/white_trans"
         app:backgroundTint="@null"
-        android:background="@drawable/custom_button_signup"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textColor="#FEA387"
+        android:background="@drawable/custom_button_white"
+        android:layout_marginHorizontal="20dp"/>
 
     <Button
         android:id="@+id/home_logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/home_update_profile"
         android:text="Log Out"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:textColor="#FEA387"
         app:backgroundTint="@null"
-        android:background="@drawable/custom_button_login"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textColor="@color/white_trans"
+        android:background="@drawable/custom_button_red"
+
+        android:layout_marginHorizontal="20dp"/>
 
 </RelativeLayout>
