@@ -41,12 +41,15 @@ public class DashboardActivity extends AppCompatActivity {
                     mbottomNavigation.show(HOME_MENU, true);
                 }
                 else if (item.getId() == CART_MENU) {
+                    CartFragment.iTotalPrice = 0;
                     FragmentManager manager = getSupportFragmentManager();
-                    manager.beginTransaction().replace(R.id.dashboard_relative, new WishlistFragment()).commit();
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new CartFragment()).commit();
 
                     mbottomNavigation.show(CART_MENU, true);
                 }
-                else if (item.getId() == WISHLIST_MENU) {
+                else if (item.getId() == WISHLIST_MENU) {FragmentManager manager = getSupportFragmentManager();
+                    manager.beginTransaction().replace(R.id.dashboard_relative, new WishlistFragment()).commit();
+
                     mbottomNavigation.show(WISHLIST_MENU, true);
                 }
                 else if (item.getId() == PROFILE_MENU) {

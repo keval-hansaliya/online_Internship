@@ -65,7 +65,7 @@ public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyHold
     public void onBindViewHolder(@NonNull MyHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.imageView.setImageResource(Integer.parseInt(arrayList.get(position).getProductImage()));
         holder.name.setText(arrayList.get(position).getProductName());
-        holder.price.setText(arrayList.get(position).getProductPrice());
+        holder.price.setText(ConstantSp.PRICE_SYMBOL+arrayList.get(position).getProductPrice());
 //        holder.desc.setText(descArray[position]);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -51,9 +51,17 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             style="@style/button_16_white"/>
 
+        <Button
+            android:id="@+id/product_detail_remove_cart"
+            android:text="Remove from cart"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            style="@style/button_16_white"/>
         <Button
             android:id="@+id/product_detail_buy_now"
             android:text="Buy now"

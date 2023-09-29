@@ -26,7 +26,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
     ImageView imageView;
     TextView textView, price, desc;
     SharedPreferences sp;
-    Button buyNow, addCart, addWishList, removeWishlist;
+    Button buyNow, addCart, removeCart, addWishList, removeWishlist;
     Checkout checkout;
 
     SQLiteDatabase db;
@@ -57,6 +57,7 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
 
         buyNow = findViewById(R.id.product_detail_buy_now);
         addCart = findViewById(R.id.product_detail_add_to_cart);
+        removeCart = findViewById(R.id.product_detail_remove_cart);
         addWishList = findViewById(R.id.product_detail_wishlist);
         removeWishlist = findViewById(R.id.product_detail_wishlist_remove);
 
@@ -67,6 +68,16 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
 
         Checkout.preload(getApplicationContext());
 
+        String selectCartQuery = "SELECT * FROM CART WHERE USERID = '"+sp.getString(ConstantSp.ID, "")+"' AND PRODUCTID = '"+sp.getString(ConstantSp.PRODUCT_ID, "")+"' AND ORDERID = '0'";
+        Cursor cursorCart = db.rawQuery(selectCartQuery, null);
+        if(cursorCart.getCount()>0) {
+            addCart.setVisibility(View.GONE);
+            removeCart.setVisibility(View.VISIBLE);
+        } else {
+            addCart.setVisibility(View.VISIBLE);
+            removeCart.setVisibility(View.GONE);
+        }
+
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,14 +86,27 @@ public class ProductDetailActivity extends AppCompatActivity implements PaymentR
                 Cursor cursor = db.rawQuery(selectQuery, null);
                 if(cursor.getCount()>0) {
                     new CommonMethod(ProductDetailActivity.this, "Product is already present in cart");
+                } else {
+                    int iQty = 1;
+                    int iTotalPrice = iQty * Integer.parseInt(sp.getString(ConstantSp.PRODUCT_PRICE, ""));
+
+                    String insertQuery = "INSERT INTO CART VALUES(NULL, '0', '" + sp.getString(ConstantSp.ID, "") + "', '" + sp.getString(ConstantSp.PRODUCT_ID, "") + "', '" + sp.getString(ConstantSp.PRODUCT_NAME, "") + "', '" + sp.getInt(ConstantSp.PRODUCT_IMAGE, 0) + "', '" + sp.getString(ConstantSp.PRODUCT_DESC, "") + "', '" + sp.getString(ConstantSp.PRODUCT_PRICE, "") + "', '" + iQty + "', '" + iTotalPrice + "')";
+                    db.execSQL(insertQuery);
+                    new CommonMethod(ProductDetailActivity.this, "Product added to the cart");
+                    addCart.setVisibility(View.GONE);
+                    removeCart.setVisibility(View.VISIBLE);
                 }
+            }
+        });
 
-                int iQty = 3;
-                int iTotalPrice = iQty * Integer.parseInt(sp.getString(ConstantSp.PRODUCT_PRICE, ""));
-
-                String insertQuery = "INSERT INTO CART VALUES(NULL, '0', '"+sp.getString(ConstantSp.ID, "")+"', '"+sp.getString(ConstantSp.PRODUCT_ID, "")+"', '"+sp.getString(ConstantSp.PRODUCT_NAME, "")+"', '"+sp.getInt(ConstantSp.PRODUCT_IMAGE, 0)+"', '"+sp.getString(ConstantSp.PRODUCT_DESC, "")+"', '"+sp.getString(ConstantSp.PRODUCT_PRICE, "")+"', '"+iQty+"', '"+iTotalPrice+"')";
-                db.execSQL(insertQuery);
-                new CommonMethod(ProductDetailActivity.this, "Product added to the cart");
+        removeCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String deleteQuery = "DELETE FROM CART WHERE USERID = '"+sp.getString(ConstantSp.ID, "")+"' AND PRODUCTID = '"+sp.getString(ConstantSp.PRODUCT_ID, "")+"' AND ORDERID = '0'";
+                db.execSQL(deleteQuery);
+                new CommonMethod(ProductDetailActivity.this, "Product removed from cart");
+                addCart.setVisibility(View.VISIBLE);
+                removeCart.setVisibility(View.GONE);
             }
         });
 
